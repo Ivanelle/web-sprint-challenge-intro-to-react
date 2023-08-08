@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import styled, { keyframes } from 'styled-components'
 
 import Character from './components/Character';
 import Details from './components/Details';
 
+const StyledApp = styled.div`
+display: grid;
+`
+const StyledLeft = styled.div`
+grid-column: 1;
+`
+const StyledRight = styled.div`
+grid-column: 2;
+`
 
 const App = () => {
   const [characters, setCharacters] = useState([])
@@ -35,13 +45,19 @@ const App = () => {
   
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <h1 className="Header"></h1>
+      <StyledApp>
+        <StyledLeft>
       { characters.map(character => {
         return <Character key={character.id} info={character} action={openDetails}/>
       })}
+        </StyledLeft>
+        <StyledRight>
       {
         currentCharacterId && <Details characterId={currentCharacterId} close={closeDetails}/>
       }
+        </StyledRight>
+      </StyledApp>
     </div>
   );
 }
